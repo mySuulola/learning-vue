@@ -1,9 +1,9 @@
 <template>
   <div class="md:flex flex-1">
     <div
-      class="md:w-1/2 bg-blue-500 flex flex-col justify-center py-4 px-6 dark:bg-gray-900"
+      class="md:w-1/2 bg-blue-500 flex flex-col justify-center py-4 px-6 dark:bg-gray-900 items-center"
     >
-      <img src="../assets/auth.svg" class="w-auto" alt="login" />
+      <img src="../assets/auth.svg" class="w-auto md:w-2/3" alt="login" />
       <h1 class="text-2xl text-white py-4 font-semibold">
         Connect with the right community
       </h1>

@@ -1,9 +1,9 @@
 <template>
   <div class="md:flex flex-1">
     <div
-      class="md:w-1/2 bg-blue-500 flex flex-col justify-center py-4 px-6 dark:bg-gray-900"
+      class="md:w-1/2 bg-blue-500 flex flex-col justify-center py-4 px-6 dark:bg-gray-900 items-center"
     >
-      <img src="../assets/people.svg" class="w-auto" alt="login" />
+      <img src="../assets/people.svg" class="w-auto lg:w-2/3" alt="login" />
       <h1 class="text-xl text-white py-4 font-semibold text-center pt-5">
         Join the company of achievers
       </h1>
