@@ -1,22 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import store from '../store';
-// import Home from '../views/Home.vue';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: () => import('../views/Landing.vue'),
+    protected: false,
   },
   {
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
+    protected: false,
   },
   {
     path: '/register',
     name: 'Signup',
     component: () => import('../views/SignUp.vue'),
+    protected: false,
   },
   {
     path: '/about',
@@ -27,9 +29,14 @@ const routes = [
     path: '/home',
     name: 'Dashboard',
     component: () => import('../views/Dashboard.vue'),
+    protected: true,
     meta: {
       authorized: true,
     },
+  },
+  {
+    path: "/:catchAll(.*)",
+    component: () => import('../views/NotFound.vue'),
   },
 ];
 
@@ -41,7 +48,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const user = store;
   console.log(user);
-  // console.log(to);
+  console.log(to, "to is here");
   // console.log(from);
   // console.log(next);
   next();

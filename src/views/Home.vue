@@ -23,16 +23,23 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { reactive, computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "Home",
   setup(props, { emit }) {
+    const store = useStore();
+    const user = computed(() => store.state.User.user);
+
+    console.log(user, "userrrrrrr");
+
     const state = reactive({
       name: "Guest",
       age: 20,
       message: "",
       username: computed(() => `${state.name.toLowerCase()}_${state.age}`),
     });
+
     const message = computed({
       get: () => props.modelValue,
       set: (value) => emit("update:modelValue", value),

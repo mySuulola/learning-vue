@@ -2,7 +2,7 @@ const ModeModule = {
   namespaced: true,
 
   state: {
-    darkMode: true,
+    darkMode: false,
   },
 
   mutations: {
