@@ -18,7 +18,11 @@
       class="md:w-1/2 bg-gray-100 flex flex-col justify-center px-10 py-4 dark:bg-gray-900 items-center"
     >
       <form class="w-full lg:w-2/3" @submit.prevent="processUserLogin">
-        <CustomInput v-model="state.username" label="Username" type="text" />
+        <CustomInput
+          v-model="state.username"
+          label="Username/Email"
+          type="text"
+        />
         <CustomInput
           v-model="state.password"
           label="Password"
@@ -28,6 +32,12 @@
           Login
         </button>
       </form>
+      <p class="text-center text-xs font-thin mt-3">Or login using</p>
+      <div class="mt-4 flex justify-center">
+        <img src="../assets/apple.svg" class="w-7" alt="apple signup" />
+        <img src="../assets/google.svg" class="w-7 mx-6" alt="google login" />
+        <img src="../assets/facebook.svg" class="w-7" alt="facebook login" />
+      </div>
       <p class="text-gray-500 mt-4">
         Not registered?
         <router-link to="/register" class="text-blue-500"

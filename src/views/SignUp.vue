@@ -4,7 +4,7 @@
       class="md:w-1/2 bg-blue-500 flex flex-col justify-center py-4 px-6 dark:bg-gray-900 items-center"
     >
       <img src="../assets/people.svg" class="w-auto lg:w-2/3" alt="login" />
-      <h1 class="text-xl text-white py-4 font-semibold text-center pt-5">
+      <h1 class="text-xl text-white py-4 text-center pt-5">
         Join the company of achievers
       </h1>
     </div>
@@ -13,6 +13,7 @@
     >
       <form class="w-full lg:w-2/3" @submit.prevent="processUserRegistration">
         <p class="text-sm text-red-400 text-center">{{ state.error }}</p>
+        <p class="text-center text-xl uppercase text-blue-400">Sign Up</p>
         <CustomInput v-model="state.firstName" label="First Name" type="text" />
         <CustomInput v-model="state.lastName" label="Last Name" type="text" />
         <CustomInput
@@ -21,7 +22,7 @@
           type="tel"
         />
         <CustomInput v-model="state.email" label="Email" type="text" />
-        <CustomInput v-model="state.username" label="Username" type="text" />
+        <!-- <CustomInput v-model="state.username" label="Username" type="text" /> -->
         <CustomInput
           v-model="state.password"
           label="Password"
@@ -36,6 +37,12 @@
           Sign Up
         </button>
       </form>
+      <p class="text-center text-xs font-thin mt-3">Or sign up using</p>
+      <div class="mt-4 flex justify-center">
+        <img src="../assets/apple.svg" class="w-7" alt="apple signup" />
+        <img src="../assets/google.svg" class="w-7 mx-6 " alt="google login" />
+        <img src="../assets/facebook.svg" class="w-7" alt="facebook login" />
+      </div>
       <p class="text-gray-500 mt-4">
         Already registered?
         <router-link to="/login" class="text-blue-500">Login here</router-link>
@@ -60,7 +67,7 @@ export default {
     const store = useStore();
 
     const state = reactive({
-      username: "",
+      // username: "",
       password: "",
       phoneNumber: "",
       confirmPassword: "",

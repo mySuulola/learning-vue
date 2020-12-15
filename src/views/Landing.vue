@@ -20,7 +20,7 @@
         >
         <router-link
           to="/register"
-          class="bg-white text-blue-900 md:mr-5 px-10 py-2 md:py-1 rounded text-center mt-2 border-2 border-blue-900"
+          class="bg-white text-blue-900 md:mr-5 px-10 py-2 md:py-1 rounded text-center mt-2 border border-blue-900"
           >Sign Up
         </router-link>
       </div>
