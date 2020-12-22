@@ -1,6 +1,6 @@
 <template>
   <div :class="{ dark: darkMode }" class="min-h-screen flex flex-col">
-    <UserNav :darkMode="darkMode" />
+    <UserNav v-if="user === null" :darkMode="darkMode" />
     <router-view />
   </div>
 </template>
@@ -18,9 +18,11 @@ export default {
   setup() {
     const store = useStore();
     const darkMode = computed(() => store.state.Mode.darkMode);
+    const user = computed(() => store.state.User.user);
 
     return {
       darkMode,
+      user,
     };
   },
 };
