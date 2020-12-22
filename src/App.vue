@@ -1,30 +1,29 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div :class="{ dark: darkMode }" class="min-h-screen flex flex-col">
+    <UserNav v-if="user === null" :darkMode="darkMode" />
+    <router-view />
   </div>
-  <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { useStore } from "vuex";
+import { computed } from "vue";
+import UserNav from "./components/UserNav.vue";
 
-#nav {
-  padding: 30px;
+export default {
+  name: "App",
+  components: {
+    UserNav,
+  },
+  setup() {
+    const store = useStore();
+    const darkMode = computed(() => store.state.Mode.darkMode);
+    const user = computed(() => store.state.User.user);
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+    return {
+      darkMode,
+      user,
+    };
+  },
+};
+</script>
