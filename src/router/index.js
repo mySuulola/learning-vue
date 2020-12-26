@@ -6,37 +6,56 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('../views/Landing.vue'),
-    protected: false,
+    meta: {
+      protected: false,
+    },
   },
   {
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
-    protected: false,
+    meta: {
+      protected: false,
+    },
   },
   {
     path: '/register',
     name: 'Signup',
     component: () => import('../views/SignUp.vue'),
-    protected: false,
+    meta: {
+      protected: false,
+    },
   },
   {
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue'),
+    meta: {
+      protected: false,
+    },
   },
   {
     path: '/home',
     name: 'Dashboard',
     component: () => import('../views/Dashboard.vue'),
-    protected: true,
     meta: {
-      authorized: true,
+      protected: true,
+    },
+  },
+  {
+    path: '/star-war',
+    name: 'Star war',
+    component: () => import('../views/StarWar.vue'),
+    meta: {
+      protected: true,
     },
   },
   {
     path: "/:catchAll(.*)",
     component: () => import('../views/NotFound.vue'),
+    meta: {
+      protected: 'all',
+    },
   },
 ];
 
@@ -47,14 +66,15 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const user = store;
-  console.log(user);
-  console.log(to, "to is here");
-  // console.log(from);
-  // console.log(next);
+  if (!user.state.User.user && to.meta.protected === true) {
+    router.push('login');
+    return;
+  }
+  if (user.state.User.user && to.meta.protected === false) {
+    router.push('home');
+    return;
+  }
   next();
-
-  // if(!user)
-  // const isRegistered = false;
 });
 
 export default router;

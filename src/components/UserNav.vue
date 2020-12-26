@@ -1,62 +1,63 @@
 <template>
-  <div class="flex justify-between dark:bg-black">
-    <router-link
-      :class="`md:w-1/2 pl-4 pt-4 ${
-        state.route === '/'
-          ? 'bg-gray-50 dark:bg-black'
-          : 'bg-blue-500 dark:bg-gray-900'
-      }`"
-      to="/"
-    >
-      <img src="../assets/coy-logo.png" alt="logo" class="w-16 md:w-24" />
-    </router-link>
-
-    <div
-      :class="`flex md:w-1/2 pr-4 pt-4 justify-end ${
-        state.route === '/'
-          ? 'bg-gray-50 dark:bg-black'
-          : 'bg-gray-100 dark:bg-gray-900'
-      }`"
-    >
-      <router-link to="/">
-        <p class="text-gray-500 mx-5 dark:text-white">Guide</p>
-      </router-link>
-
-      <router-link to="/">
-        <p class="text-gray-500 dark:text-white mx-2 dark:font-bold">FAQs</p>
-      </router-link>
-
-      <Switch v-model:checked="state.darkMode" />
+  <div id="usernav" class="flex justify-between pt-4 px-3 border-b mb-5 pb-2">
+    <div class="shadow flex rounded md:w-1/3 mr-5">
+      <input
+        type="text"
+        class="bg-gray-50 border-0 placeholder-gray-500 w-full rounded p-3 hover:border:0 h-10 cursor-not-allowed"
+        placeholder="Search..."
+      />
+      <button
+        class="bg-gray-50 w-auto flex justify-end items-center text-gray-500 p-2 hover:text-gray-700 rounded cursor-not-allowed"
+      >
+        <svg
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          view-box="0 0 24 24"
+          class="w-6 h-6"
+        >
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="flex items-center">
+      <img src="../assets/apple.svg" alt="noti" class="w-4" />
+      <p
+        @click="logoutUser"
+        class="mx-3 px-2 py-1 rounded-xl bg-gray-200 cursor-pointer"
+      >
+        Logout
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, reactive } from "vue";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
-import Switch from "./Switch.vue";
-import router from "../router";
+import { useStore } from 'vuex';
 
 export default {
   name: "UserNav",
-  router,
-  components: {
-    Switch,
-  },
   props: {
     darkMode: Boolean,
   },
 
-  setup(props) {
+  setup() {
+    const store = useStore();
+    const user = computed(() => store.state.User.user);
     const route = useRouter();
-    console.log(route.currentRoute);
 
-    const state = reactive({
-      darkMode: computed(() => props.darkMode),
-      route: computed(() => route.currentRoute.value.path),
-    });
+    const logoutUser = async () => {
+      await store.dispatch("User/setUser", null);
+      route.push({ path: "login" });
+    };
+
     return {
-      state,
+      user,
+      logoutUser,
     };
   },
 };
